@@ -12,8 +12,30 @@ import java.util.List;
 
 public class SalesDataAnalyzer {
    public List<SalesRecord> readFile(String fileName) {
-       return null;
+       List<SalesRecord> recordList = new ArrayList<>();
+       try{
+           FileReader fileReader = new FileReader(fileName);
+           BufferedReader bufferedReader = new BufferedReader(fileReader);
+           String data = bufferedReader.readLine();
+           while((data = bufferedReader.readLine()) != null){
+            String[] val = data.split(",");
+                String date = val[0];
+                int customer_id = Integer.parseInt(val[1]);
+                int product_category = Integer.parseInt(val[2]);
+                String payment_method = val[3];
+                double amount = Double.parseDouble(val[4]);
+                double time_on_site = Double.parseDouble(val[5]);
+                int clicks_in_site = Integer.parseInt(val[6]);
+                recordList.add(new SalesRecord(date,customer_id,product_category,payment_method,amount,time_on_site,clicks_in_site));
+
+           }
+       }catch (IOException e){
+           e.printStackTrace();
+       }
+       return recordList;
     }
+
+
 
     public List<SalesRecord> getAllCustomersSortedByPurchaseAmount(List<SalesRecord> salesData){
       return null;
