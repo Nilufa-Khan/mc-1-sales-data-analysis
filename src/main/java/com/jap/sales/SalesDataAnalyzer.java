@@ -38,10 +38,14 @@ public class SalesDataAnalyzer {
 
 
     public List<SalesRecord> getAllCustomersSortedByPurchaseAmount(List<SalesRecord> salesData){
-      return null;
+       Comparator<SalesRecord> recordComparator = (a1,a2) -> Double.compare (a1.getAmount() , a2.getAmount());
+       Collections.sort(salesData,recordComparator);
+      return salesData;
     }
     public SalesRecord getTopCustomerWhoSpentMaxTimeOnSite(List<SalesRecord> salesData){
-       return null;
+        Comparator<SalesRecord> recordComparator = (a1,a2) -> Double.compare(a1.getTime_on_site() , a2.getTime_on_site());
+        Collections.sort(salesData,recordComparator);
+        return salesData.get(0);
     }
 
 
